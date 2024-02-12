@@ -18,14 +18,12 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+//LinkController
 Route::get('get_links/{id}', [\App\Http\Controllers\LinkController::class, 'getLinks']);
-
 Route::post('new_link', [\App\Http\Controllers\LinkController::class, 'newLink']);
-
 Route::get('get_link/{id}', [\App\Http\Controllers\LinkController::class, 'getLink']);
-
 Route::post('update_link/{id}', [\App\Http\Controllers\LinkController::class, 'updateLink']);
 
-
+//UcerController
 Route::get('get_users', [\App\Http\Controllers\UserController::class, 'getAllUsers']);
+Route::get('get_user/{id}', [\App\Http\Controllers\UserController::class, 'getUserById']);

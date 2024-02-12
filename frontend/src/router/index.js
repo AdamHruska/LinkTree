@@ -5,6 +5,7 @@ import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import newLinkForm from "../components/newLinkForm.vue";
 import UsersView from "../views/UsersView.vue";
+import unLoggedInProfileView from "../views/unLoggedProfileVIew.vue";
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +34,11 @@ const router = createRouter({
 			path: "/users",
 			name: "users",
 			component: UsersView,
+		},
+		{
+			path: "/profile/:id",
+			name: "profile",
+			component: unLoggedInProfileView,
 		},
 	],
 });

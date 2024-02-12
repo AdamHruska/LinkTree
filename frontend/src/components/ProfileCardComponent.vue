@@ -1,5 +1,11 @@
 <script setup>
 const props = defineProps(["user"]);
+import { useRouter } from "vue-router";
+const router = useRouter();
+
+const profileDetail = () => {
+	router.push(`/profile/${props.user.id}`);
+};
 </script>
 
 <template>
@@ -15,8 +21,9 @@ const props = defineProps(["user"]);
 		<p class="text-center text-sm text-gray-400 mb-4">{{ user.bio }}</p>
 		<button
 			class="w-full bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mb-2"
+			@click="profileDetail"
 		>
-			Edit Profile
+			See Profile
 		</button>
 	</div>
 </template>

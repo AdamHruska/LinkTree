@@ -12,4 +12,10 @@ class UserController extends Controller
         $users = User::all(['id', 'name', 'surename', 'image_source', 'bio',]);
         return response()->json($users);
     }
+    
+    public function getUserById($id)
+    {
+        $user = User::find($id);
+        return response()->json($user);
+    }
 }
