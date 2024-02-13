@@ -48,34 +48,50 @@ const handleID = (id) => {
 <template>
 	<div class="bg-gray-900 text-white min-h-screen flex justify-center">
 		<div class="w-[550px] mx-auto py-8 px-4">
-			<h1 class="text-2xl font-semibold text-center mb-8">
-				{{ user.name }} {{ user.surename }}
-			</h1>
-			<button
-				v-if="user.id === store.id"
-				@click="changeEdit"
-				class="w-full bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mb-4"
-			>
-				Edit
-			</button>
-			<img class="mb-5 mx-auto w-60 h-60" :src="user.image_source" alt="logo" />
-			<p class="text-center font-medium mb-7 text-slate-400">{{ user.bio }}r</p>
-			<div class="flex flex-col">
-				<LinkComponent
-					v-for="link in links"
-					:key="link.id"
-					:link="link"
-					:showEdit="showEdit"
-					@editLink="showEditForm"
-					@ID="handleID"
-				/>
+			<div class="flex flex-col items-center gap-6">
+				<h1
+					v-if="user.id !== store.id"
+					class="font-semibold text-2xl text-center mt-16"
+				>
+					U are not logged in.
+				</h1>
 			</div>
-			<button
-				@click="showForm"
-				class="w-full bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mb-4 font-semibold text-xl"
-			>
-				+
-			</button>
+			<div v-if="user.id === store.id">
+				<h1 class="text-2xl font-semibold text-center mb-8">
+					{{ user.name }} {{ user.surename }}
+				</h1>
+				<button
+					v-if="user.id === store.id"
+					@click="changeEdit"
+					class="w-full bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mb-4"
+				>
+					Edit
+				</button>
+				<img
+					class="mb-5 mx-auto w-60 h-60"
+					:src="user.image_source"
+					alt="logo"
+				/>
+				<p class="text-center font-medium mb-7 text-slate-400">
+					{{ user.bio }}r
+				</p>
+				<div class="flex flex-col">
+					<LinkComponent
+						v-for="link in links"
+						:key="link.id"
+						:link="link"
+						:showEdit="showEdit"
+						@editLink="showEditForm"
+						@ID="handleID"
+					/>
+				</div>
+				<button
+					@click="showForm"
+					class="w-full bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mb-4 font-semibold text-xl"
+				>
+					+
+				</button>
+			</div>
 		</div>
 	</div>
 	<newLinkForm v-if="showPlusLink" @showForm="showForm" />

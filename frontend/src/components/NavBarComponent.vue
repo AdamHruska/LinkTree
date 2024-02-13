@@ -1,11 +1,24 @@
 <script setup>
-import router from "@/router";
+import { useUserStore } from "../stores/userStore";
+const store = useUserStore();
+
+import axios from "axios";
+//import router from "@/router";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 const isMenuOpen = ref(false);
 
 const toggleMenu = () => {
 	isMenuOpen.value = !isMenuOpen.value;
+};
+
+const logout = async () => {
+	await axios.post("/logout");
+	store.changeId(0);
+	store.changeLogState();
+	router.push("/");
 };
 </script>
 
@@ -104,6 +117,13 @@ const toggleMenu = () => {
 
 			<!-- Logo -->
 			<div class="flex items-center">
+				<div
+					v-if="store.id !== 0"
+					class="block hover:bg-gray-700 px-3 py-2 rounded font-semibold lg:text-lg text-md text-red-500 mr-3"
+					@click="logout"
+				>
+					Logout
+				</div>
 				<img
 					src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1024px-Vue.js_Logo_2.svg.png"
 					alt="Logo"
